@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">福娃</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="splash_copyright">Copyright &#169; 1996-2018 Rest All Rights Reserved Powered by HF</string>
+    <string name="nav_header_expectations">流逝的时光，触摸不到的未来\n希望都有我的陪伴!</string>
+</resources>

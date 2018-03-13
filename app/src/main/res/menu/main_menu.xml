@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_main_scann"
+        android:icon="@drawable/main_build_scann"
+        android:title="扫一扫"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/action_main_build_more"
+        android:icon="@drawable/main_build_more"
+        android:title="更多"
+        app:showAsAction="always">
+        <menu>
+            <item
+                android:id="@+id/action_main_save_map"
+                android:icon="@drawable/ic_save"
+                android:title="保存地图"/>
+            <item android:id="@+id/action_main_build_return"
+                android:icon="@drawable/main_build_return"
+                android:title="回到原点"/>
+        </menu>
+
+    </item>
+</menu>
