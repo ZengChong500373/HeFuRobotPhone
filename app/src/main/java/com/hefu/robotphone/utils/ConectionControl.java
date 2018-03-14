@@ -3,7 +3,7 @@ package com.hefu.robotphone.utils;
 import com.google.gson.Gson;
 import com.hefu.robotphone.bean.NavigationTaskBean;
 import com.hefu.robotphone.bean.Point3DF;
-import com.hefu.robotphone.ui.activity.MainActivity;
+
 
 import java.util.ArrayList;
 
@@ -79,5 +79,15 @@ public class ConectionControl {
     }
     public static String saveMap(){
         return getRoboId() + " " + SystemInfoUtil.getMac() + " 4" + ByteUtil.byteToHexStr(ByteUtil.intToByte(CodeInstructionSet.BUF_ACTION_MAKE_MAP_SAVE), "");
+    }
+
+    public static String creatMap(){
+        return getRoboId() + " " + SystemInfoUtil.getMac() + " 4" + ByteUtil.byteToHexStr(ByteUtil.intToByte(CodeInstructionSet.BUF_ACTION_MAKE_MAP_START), "");
+    }
+    public static String cancleCreatMap(){
+        return getRoboId() + " " + SystemInfoUtil.getMac() + " 4" + ByteUtil.byteToHexStr(ByteUtil.intToByte(CodeInstructionSet.BUF_ACTION_MAKE_MAP_CANCEL), "");
+    }
+    public static String syncMap(){
+        return getRoboId() + " " + SystemInfoUtil.getMac() + " 4" + ByteUtil.byteToHexStr(ByteUtil.intToByte(CodeInstructionSet.BUF_ACTION_MAP_SYNC), "");
     }
 }

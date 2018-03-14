@@ -35,7 +35,9 @@ import com.uuzuche.lib_zxing.activity.CodeUtils;
 import java.util.List;
 
 import hefu.robotphone.sdk.socket.ArpUtil;
+
 import com.hefu.robotphone.bean.RobotBean;
+
 import hefu.robotphone.sdk.socket.RobotCmdSocket;
 import hefu.robotphone.sdk.utlis.CheckPermissionUtils;
 import hefu.robotphone.sdk.utlis.Constant;
@@ -90,18 +92,14 @@ public class MainActivity extends BaseActivity
                     case R.id.action_main_scann:
                         cameraTask();
                         break;
-                    case R.id.action_main_save_map:
-                        if (socket.getReady()){
-                            socket.robotCmd(ConectionControl.saveMap());
-                            showSnackbar("保存成功");
-                        }else {
-                            showSnackbar("请扫描二维码绑定控制机器人");
-                        }
+                    case R.id.action_main_creat_map:
+                        Intent intent = new Intent(MainActivity.this, CreatMapActivity.class);
+                        startActivity(intent);
                         break;
                     case R.id.action_main_build_return:
-                        if (socket.getReady()){
+                        if (socket.getReady()) {
                             socket.robotCmd(ConectionControl.returnOrigin());
-                        }else {
+                        } else {
                             showSnackbar("请扫描二维码绑定控制机器人");
                         }
                         break;
@@ -115,7 +113,7 @@ public class MainActivity extends BaseActivity
         img_head = navigationView.getHeaderView(0).findViewById(R.id.img_head);
         GlideUtils.loadCircular(img_head, "");
         link();
-        Switch sw_auto_login=   navigationView.getHeaderView(0).findViewById(R.id.sw_auto_login);
+        Switch sw_auto_login = navigationView.getHeaderView(0).findViewById(R.id.sw_auto_login);
         sw_auto_login.setChecked(ConectionControl.getAutoLogin());
         sw_auto_login.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override

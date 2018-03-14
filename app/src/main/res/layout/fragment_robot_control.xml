@@ -7,11 +7,17 @@
         android:background="#f5f5f5"
         android:orientation="vertical">
 
-        <com.hefu.robotphone.utils.RosImageView
-            android:layout_weight="1"
-            android:id="@+id/img_map"
+        <RelativeLayout
+            android:id="@+id/rl_background"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <com.hefu.robotphone.utils.RosImageView
+                android:id="@+id/img_map"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </RelativeLayout>
 
 
         <hefu.robotphone.uilibrary.customview.DirectionControlView

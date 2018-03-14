@@ -1,24 +1,22 @@
 package com.hefu.robotphone.ui.fragment;
 
 
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-
+import android.graphics.Color;
 import com.hefu.robotphone.R;
 import com.hefu.robotphone.databinding.FragmentRobotControlBinding;
 import com.hefu.robotphone.ui.activity.MainActivity;
 import com.hefu.robotphone.utils.ConectionControl;
 import com.hefu.robotphone.utils.DealMapUtils;
-
 import hefu.robotphone.sdk.listener.RobotInfoCallBack;
 import hefu.robotphone.sdk.socket.RobotMapSocket;
-import hefu.robotphone.sdk.utlis.ByteUtil;
-import hefu.robotphone.sdk.utlis.CodeInstructionSet;
-import hefu.robotphone.sdk.utlis.SystemInfoUtil;
+
 import hefu.robotphone.uilibrary.base.LazyFragment;
 import hefu.robotphone.uilibrary.customview.DirectionControlView;
 
 public class RobotControlFragment extends LazyFragment<FragmentRobotControlBinding> {
-    String sendMsgToken;
+
     RobotMapSocket robotMapSocket = RobotMapSocket.getInstance();
     boolean isCreatMap = false;
 
@@ -34,7 +32,6 @@ public class RobotControlFragment extends LazyFragment<FragmentRobotControlBindi
         jyhBinding.directionContralView.setOnDirectionListener(new DirectionControlView.OnDirectionListener() {
             @Override
             public void direction(DirectionControlView.Direction direction) {
-                initMap();
                 MainActivity.socket.goWhere(ConectionControl.getDirectionString(direction));
             }
         });
@@ -42,8 +39,7 @@ public class RobotControlFragment extends LazyFragment<FragmentRobotControlBindi
 
     public void initMap() {
         if (MainActivity.socket.getReady() && isCreatMap == false) {
-            String sendMsg = ConectionControl.getPadIp() + " " + SystemInfoUtil.getMac() + " 4" + ByteUtil.byteToHexStr(ByteUtil.intToByte(CodeInstructionSet.BUF_ACTION_MAKE_MAP_START), "");
-            MainActivity.socket.robotCmd(sendMsg);
+            jyhBinding.rlBackground.setBackgroundColor(Color.parseColor("#7F7F7F"));
             robotMapSocket.setHostName(ConectionControl.getComputerIp());
             robotMapSocket.start();
             robotMapSocket.setCallBack(new RobotInfoCallBack() {
@@ -52,13 +48,28 @@ public class RobotControlFragment extends LazyFragment<FragmentRobotControlBindi
                     isCreatMap = true;
                     DealMapUtils.dellRobotMessage(str);
                 }
-
                 @Override
                 public void RobotInfoFail() {
 
                 }
             });
-        }
+      }
+    }
 
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        jyhBinding.imgMap.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                initMap();
+                Bitmap bitmap=DealMapUtils.getCurrentBit();
+                if (bitmap!=null){
+                    jyhBinding.imgMap.setImageBitmap(bitmap);
+                }
+            }
+        },800);
     }
 }

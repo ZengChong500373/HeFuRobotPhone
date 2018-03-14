@@ -6,12 +6,13 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
+import android.util.Base64;
 import android.widget.ImageView;
+
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.BitmapImageViewTarget;
+
 import hefu.robotphone.uilibrary.R;
-
-
 
 
 /**
@@ -23,6 +24,7 @@ public class GlideUtils {
     public static void init(Context initContext) {
         mContext = initContext;
     }
+
 
 
     public static void loadCircular(final ImageView img, String url) {
@@ -40,6 +42,7 @@ public class GlideUtils {
                         circularBitmapDrawable.setCircular(true);
                         img.setImageDrawable(circularBitmapDrawable);
                     }
+
                     @Override
                     public void onLoadFailed(Exception e, Drawable errorDrawable) {
                         RoundedBitmapDrawable circularBitmapDrawable =
