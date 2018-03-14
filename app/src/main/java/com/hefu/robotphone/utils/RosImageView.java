@@ -1,7 +1,7 @@
 package com.hefu.robotphone.utils;
 
 
-import android.app.Activity;
+
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -169,7 +169,7 @@ public class RosImageView extends android.support.v7.widget.AppCompatImageView {
      * 初始化UI
      */
     private void initUI(Context context) {
-//        EventBus.getDefault().register(this);
+
         vibrator = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
         robotBitmap = BitmapFactory.decodeResource(getResources(),
                 R.drawable.crear_map_direction);

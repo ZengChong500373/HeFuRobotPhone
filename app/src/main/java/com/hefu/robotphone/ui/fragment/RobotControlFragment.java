@@ -39,13 +39,18 @@ public class RobotControlFragment extends LazyFragment<FragmentRobotControlBindi
 
     public void initMap() {
         if (MainActivity.socket.getReady() && isCreatMap == false) {
-            jyhBinding.rlBackground.setBackgroundColor(Color.parseColor("#7F7F7F"));
+            if (DealMapUtils.getCurrentBit()!=null){
+                jyhBinding.rlBackground.setBackgroundColor(Color.parseColor("#7F7F7F"));
+            }
             robotMapSocket.setHostName(ConectionControl.getComputerIp());
             robotMapSocket.start();
             robotMapSocket.setCallBack(new RobotInfoCallBack() {
                 @Override
                 public void RobotInfoSuccess(final String str) {
                     isCreatMap = true;
+                    if (isCreatMap){
+                        jyhBinding.rlBackground.setBackgroundColor(Color.parseColor("#7F7F7F"));
+                    }
                     DealMapUtils.dellRobotMessage(str);
                 }
                 @Override

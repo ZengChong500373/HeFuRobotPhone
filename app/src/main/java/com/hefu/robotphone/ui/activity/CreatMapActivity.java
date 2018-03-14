@@ -3,6 +3,7 @@ package com.hefu.robotphone.ui.activity;
 import android.databinding.DataBindingUtil;
 import android.graphics.BitmapFactory;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
@@ -22,7 +23,7 @@ import hefu.robotphone.uilibrary.customview.DirectionControlView;
 public class CreatMapActivity extends AppCompatActivity {
     ActivityCreatMapBinding binding;
     RobotMapSocket robotMapSocket = RobotMapSocket.getInstance();
-
+    boolean isCreatMap = false;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -33,6 +34,9 @@ public class CreatMapActivity extends AppCompatActivity {
     }
 
     private void initData() {
+        if (DealMapUtils.getCurrentBit()!=null){
+            binding.rlBackground.setBackgroundColor(Color.parseColor("#7F7F7F"));
+        }
         binding.imgMap.setImageBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.creat_map_backgroud));
         binding.imgMap.setWork_mode(RosImageView.WORK_MODE_NAVI_CREATMAP);
         robotMapSocket.setHostName(ConectionControl.getComputerIp());
@@ -40,6 +44,10 @@ public class CreatMapActivity extends AppCompatActivity {
         robotMapSocket.setCallBack(new RobotInfoCallBack() {
             @Override
             public void RobotInfoSuccess(final String str) {
+                isCreatMap=true;
+                if (isCreatMap){
+                    binding.rlBackground.setBackgroundColor(Color.parseColor("#7F7F7F"));
+                }
                 DealMapUtils.dellRobotMessage(str);
             }
 
