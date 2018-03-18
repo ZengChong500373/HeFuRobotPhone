@@ -192,7 +192,7 @@ public class CrashHandler implements UncaughtExceptionHandler {
                     Environment.MEDIA_MOUNTED)) {
                 //获取文件输出路径
 
-                String path= RobotSdk.getContext().getExternalFilesDir(null).getAbsolutePath()+ "/crashinfo/";
+                String path= mContext.getExternalFilesDir(null).getAbsolutePath()+ "/crashinfo/";
                 //创建文件夹和文件
                 File dir = new File(path);
                 if (!dir.exists()) {

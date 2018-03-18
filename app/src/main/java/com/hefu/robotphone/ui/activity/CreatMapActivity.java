@@ -79,7 +79,7 @@ public class CreatMapActivity extends AppCompatActivity {
     public void creatMap(View view) {
         if (MainActivity.socket.getReady()) {
             MainActivity.socket.robotCmd(ConectionControl.creatMap());
-
+            showSnackbar("创建新地图");
         } else {
             showSnackbar("请扫描二维码绑定控制机器人");
         }
@@ -88,6 +88,7 @@ public class CreatMapActivity extends AppCompatActivity {
     public void cancleCreatMap(View view) {
         if (MainActivity.socket.getReady()) {
             MainActivity.socket.robotCmd(ConectionControl.cancleCreatMap());
+            showSnackbar("取消创建");
         } else {
             showSnackbar("未连接机器人");
         }
@@ -96,6 +97,7 @@ public class CreatMapActivity extends AppCompatActivity {
     public void saveMap(View view) {
         if (MainActivity.socket.getReady()) {
             MainActivity.socket.robotCmd(ConectionControl.saveMap());
+            showSnackbar("保存成功");
         } else {
             showSnackbar("未连接机器人");
         }
@@ -104,9 +106,9 @@ public class CreatMapActivity extends AppCompatActivity {
     public void syncMap(View view) {
         if (MainActivity.socket.getReady()) {
             MainActivity.socket.robotCmd(ConectionControl.syncMap());
-
+            showSnackbar("同步地图");
         } else {
-
+            showSnackbar("未连接机器人");
         }
     }
 
