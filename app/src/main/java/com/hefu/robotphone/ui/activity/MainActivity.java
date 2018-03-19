@@ -99,6 +99,7 @@ public class MainActivity extends BaseActivity
                     case R.id.action_main_build_return:
                         if (socket.getReady()) {
                             socket.robotCmd(ConectionControl.returnOrigin());
+                            socket.robotCmd(ConectionControl.speakWords("正在返回原点"));
                         } else {
                             showSnackbar("请扫描二维码绑定控制机器人");
                         }

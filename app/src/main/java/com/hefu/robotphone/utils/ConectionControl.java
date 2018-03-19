@@ -2,11 +2,6 @@ package com.hefu.robotphone.utils;
 
 import com.google.gson.Gson;
 import com.hefu.robotphone.bean.NavigationTaskBean;
-import com.hefu.robotphone.bean.Point3DF;
-
-
-import java.util.ArrayList;
-
 import hefu.robotphone.sdk.utlis.ByteUtil;
 import hefu.robotphone.sdk.utlis.CodeInstructionSet;
 import hefu.robotphone.sdk.utlis.SystemInfoUtil;
@@ -42,8 +37,6 @@ public class ConectionControl {
 
     public static String returnOrigin(){
         Gson gson1 = new Gson();
-        ArrayList<Point3DF> arrayList = new ArrayList<>();
-        Point3DF point3DF = null;
         NavigationTaskBean navigationTaskBean = new NavigationTaskBean();
         String pointList = "0,0,0|";
         navigationTaskBean.setPointList(pointList);
@@ -89,5 +82,8 @@ public class ConectionControl {
     }
     public static String syncMap(){
         return getRoboId() + " " + SystemInfoUtil.getMac() + " 4" + ByteUtil.byteToHexStr(ByteUtil.intToByte(CodeInstructionSet.BUF_ACTION_MAP_SYNC), "");
+    }
+    public static String speakWords(String str){
+        return "speakTTS" + " " + SystemInfoUtil.getMac() + " 4" + " "+ " " + "888"+ " " + str ;
     }
 }
