@@ -2,10 +2,13 @@ package com.hefu.robotphone.ui.activity;
 
 import android.Manifest;
 import android.content.Intent;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.FileProvider;
 import android.support.v4.view.ViewPager;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -19,21 +22,17 @@ import android.view.MenuItem;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.Switch;
-import android.widget.TextView;
 import android.widget.Toast;
 
-
-import com.google.gson.Gson;
 import com.hefu.robotphone.R;
-import com.hefu.robotphone.bean.NavigationTaskBean;
-import com.hefu.robotphone.bean.Point3DF;
 import com.hefu.robotphone.ui.adapter.MainPagerAdapter;
 import com.hefu.robotphone.utils.ConectionControl;
 import com.uuzuche.lib_zxing.activity.CodeUtils;
 
-
+import java.io.File;
 import java.util.List;
 
+import hefu.robotphone.sdk.RobotSdk;
 import hefu.robotphone.sdk.socket.ArpUtil;
 
 import com.hefu.robotphone.bean.RobotBean;
@@ -41,6 +40,7 @@ import com.hefu.robotphone.bean.RobotBean;
 import hefu.robotphone.sdk.socket.RobotCmdSocket;
 import hefu.robotphone.sdk.utlis.CheckPermissionUtils;
 import hefu.robotphone.sdk.utlis.Constant;
+import hefu.robotphone.sdk.utlis.VersionUtils;
 import hefu.robotphone.uilibrary.base.BaseActivity;
 import hefu.robotphone.uilibrary.utils.GlideUtils;
 import pub.devrel.easypermissions.AfterPermissionGranted;
@@ -63,6 +63,7 @@ public class MainActivity extends BaseActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        VersionUtils.init(this);
         //初始化权限
         initPermission();
         toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -248,5 +249,21 @@ public class MainActivity extends BaseActivity
             EasyPermissions.requestPermissions(this, "需要请求camera权限",
                     REQUEST_CAMERA_PERM, Manifest.permission.CAMERA);
         }
+    }
+
+    public void install() {
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            Uri contentUri = FileProvider.
+                    getUriForFile(MainActivity.this,
+                            "",
+                            new File(Constant.APKPATH));
+            intent.setDataAndType(contentUri, "application/vnd.android.package-archive");
+        } else {
+            intent.setDataAndType(Uri.fromFile(new File(Constant.APKPATH)), "application/vnd.android.package-archive");
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        }
+        RobotSdk.getContext().startActivity(intent);
     }
 }

@@ -12,6 +12,7 @@ import java.net.Socket;
 
 import hefu.robotphone.sdk.listener.RobotInfoCallBack;
 import hefu.robotphone.sdk.utlis.Constant;
+import hefu.robotphone.sdk.utlis.CrashHandler;
 import hefu.robotphone.sdk.utlis.SystemInfoUtil;
 import hefu.robotphone.sdk.utlis.ThreadManager;
 
@@ -73,6 +74,7 @@ public class RobotCmdSocket {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                     isReady=false;
+                    mThread=null;
                 }
             }
         });
@@ -136,6 +138,7 @@ public class RobotCmdSocket {
             }
         } catch (IOException e) {
             e.printStackTrace();
+            CrashHandler.getInstance().saveCrashInfo2File(e);
             Log.e("jyh_error", e.toString());
         }
     }

@@ -6,7 +6,7 @@ android {
         applicationId "com.hefu.robotphone"
         minSdkVersion 15
         targetSdkVersion 22
-        versionCode 3
+        versionCode 2
         versionName "1.2"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
@@ -29,15 +29,12 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
-
     implementation project(':sdklibrary')
     implementation project(':uilibrary')
-
     //二维码扫描  https://github.com/yipianfengye/android-zxingLibrary
     implementation 'cn.yipianfengye.android:zxing-library:2.2'
-
     //权限管理
     implementation 'pub.devrel:easypermissions:0.2.0'
-
     implementation 'com.google.code.gson:gson:2.4'
+    implementation 'com.android.support:support-v4:24.2.0'
 }
