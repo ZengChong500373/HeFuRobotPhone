@@ -19,6 +19,9 @@
             <item android:id="@+id/action_main_build_return"
                 android:icon="@drawable/main_build_return"
                 android:title="回到原点"/>
+            <item android:id="@+id/action_main_media"
+                android:icon="@drawable/main_build_return"
+                android:title="播放音频"/>
         </menu>
 
     </item>

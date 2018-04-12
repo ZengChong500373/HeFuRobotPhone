@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    tools:openDrawer="start">
+<EditText
+    android:id="@+id/ed"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" />
+ <Button
+     android:text="发送"
+     android:onClick="send"
+     android:layout_width="wrap_content"
+     android:layout_height="wrap_content" />
+   <Button
+       android:text="第一段1"
+       android:onClick="one"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content" />
+    <Button
+        android:text="第一段2"
+        android:onClick="two"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <Button
+        android:text="第一段3"
+        android:onClick="three"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <Button
+        android:text="第二段1"
+        android:onClick="four"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <Button
+        android:text="第二段2"
+        android:onClick="five"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <Button
+        android:text="停止"
+        android:onClick="stop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>

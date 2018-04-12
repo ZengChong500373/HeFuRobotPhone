@@ -105,6 +105,10 @@ public class MainActivity extends BaseActivity
                             showSnackbar("请扫描二维码绑定控制机器人");
                         }
                         break;
+                    case R.id.action_main_media:
+                        Intent intent2 = new Intent(MainActivity.this, PlayMediaActivity.class);
+                        startActivity(intent2);
+                        break;
                 }
 
                 return false;
