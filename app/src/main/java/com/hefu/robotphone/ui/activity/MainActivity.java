@@ -40,7 +40,7 @@ import com.hefu.robotphone.bean.RobotBean;
 import hefu.robotphone.sdk.socket.RobotCmdSocket;
 import hefu.robotphone.sdk.utlis.CheckPermissionUtils;
 import hefu.robotphone.sdk.utlis.Constant;
-import hefu.robotphone.sdk.utlis.VersionUtils;
+import com.hefu.robotphone.utils.VersionUtils;
 import hefu.robotphone.uilibrary.base.BaseActivity;
 import hefu.robotphone.uilibrary.utils.GlideUtils;
 import pub.devrel.easypermissions.AfterPermissionGranted;
@@ -255,19 +255,5 @@ public class MainActivity extends BaseActivity
         }
     }
 
-    public void install() {
-        Intent intent = new Intent(Intent.ACTION_VIEW);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-            Uri contentUri = FileProvider.
-                    getUriForFile(MainActivity.this,
-                            "",
-                            new File(Constant.APKPATH));
-            intent.setDataAndType(contentUri, "application/vnd.android.package-archive");
-        } else {
-            intent.setDataAndType(Uri.fromFile(new File(Constant.APKPATH)), "application/vnd.android.package-archive");
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        }
-        RobotSdk.getContext().startActivity(intent);
-    }
+
 }

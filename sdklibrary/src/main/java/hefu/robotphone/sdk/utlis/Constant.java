@@ -13,4 +13,7 @@ public class Constant {
     public final static String BUF_INSTRUCTION_SPLIT_SYMBOL = "\\";
     /**apk 在本地的存放地址*/
     public static String APKPATH = RobotSdk.getContext().getExternalFilesDir(null).getAbsolutePath() + "/fuwa.apk";
+
+    public static String YS_APP_KEY = "bff9469066d3420fb3fd9e9850071a54";
+    public static String YS_SECRET = "6c0135e65c6d3ef4dbbda2895766cce9";
 }

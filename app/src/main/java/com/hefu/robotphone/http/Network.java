@@ -1,4 +1,4 @@
-package hefu.robotphone.sdk.http;
+package com.hefu.robotphone.http;
 
 import java.io.File;
 import java.util.concurrent.TimeUnit;
@@ -20,10 +20,11 @@ public class Network {
     private static Converter.Factory gsonConverterFactory = GsonConverterFactory.create();
     private static CallAdapter.Factory rxJavaCallAdapterFactory = RxJavaCallAdapterFactory.create();
     private static HttpMethods methods;
+    private static YSMethods  ysMethods;
 
     private static String BASEURL="http://api.fir.im/apps/latest/";
-
-    private static void initOkhttp() {
+    private static String YS_BASEURL="https://open.ys7.com/";
+    public static void initOkhttp() {
         if (mOkHttpClient == null) {
             synchronized (Network.class) {
                 if (mOkHttpClient == null) {
@@ -55,5 +56,18 @@ public class Network {
         return methods;
     }
 
+    public static YSMethods getYSMethods() {
+        initOkhttp();
+        if (ysMethods == null) {
+            Retrofit retrofit = new Retrofit.Builder()
+                    .client(mOkHttpClient)
+                    .baseUrl(YS_BASEURL)
+                    .addConverterFactory(gsonConverterFactory)
+                    .addCallAdapterFactory(rxJavaCallAdapterFactory)
 
+                    .build();
+            ysMethods = retrofit.create(YSMethods.class);
+        }
+        return ysMethods;
+    }
 }

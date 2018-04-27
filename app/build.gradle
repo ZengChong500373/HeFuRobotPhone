@@ -4,7 +4,7 @@ android {
     compileSdkVersion 27
     defaultConfig {
         applicationId "com.hefu.robotphone"
-        minSdkVersion 15
+        minSdkVersion 16
         targetSdkVersion 22
         versionCode 5
         versionName "1.2"
@@ -18,6 +18,9 @@ android {
     }
     dataBinding {
         enabled true
+    }
+    packagingOptions {//加上这写代码
+        pickFirst 'META-INF/*'
     }
 }
 
@@ -37,4 +40,15 @@ dependencies {
     implementation 'pub.devrel:easypermissions:0.2.0'
     implementation 'com.google.code.gson:gson:2.4'
     implementation 'com.android.support:support-v4:24.2.0'
+
+    implementation 'com.hikvision.ezviz:ezviz-sdk:4.8.2'
+
+    //rx
+    implementation 'io.reactivex:rxandroid:1.1.0'
+    implementation 'io.reactivex:rxjava:1.1.0'
+
+    implementation 'com.squareup.okhttp3:okhttp:3.4.1'
+    implementation 'com.squareup.retrofit2:retrofit:2.1.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.0.0'
+    implementation 'com.squareup.retrofit2:adapter-rxjava:2.0.0'
 }

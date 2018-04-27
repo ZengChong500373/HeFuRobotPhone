@@ -1,4 +1,4 @@
-package hefu.robotphone.sdk.utlis;
+package com.hefu.robotphone.utils;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -15,7 +15,12 @@ import android.support.v7.app.AlertDialog;
 import java.io.File;
 import hefu.robotphone.sdk.RobotSdk;
 import hefu.robotphone.sdk.bean.VersionBean;
-import hefu.robotphone.sdk.http.Network;
+import com.hefu.robotphone.http.Network;
+
+import hefu.robotphone.sdk.utlis.Constant;
+import hefu.robotphone.sdk.utlis.CrashHandler;
+import hefu.robotphone.sdk.utlis.MyLog;
+
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -25,6 +30,7 @@ import okio.BufferedSource;
 import okio.Okio;
 import rx.Observable;
 import rx.Observer;
+
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Func1;
 import rx.schedulers.Schedulers;
@@ -33,6 +39,7 @@ public class VersionUtils {
   private static String newVersionUrl;
   private static Context mContext;
     public static void init(Context initContext) {
+
         mContext=initContext;
         Network.getMethods().getVersionInfos().subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Observer<VersionBean>() {
             @Override

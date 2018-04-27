@@ -58,6 +58,8 @@ public class RobotBean {
         setFpass_word(strs[2]);
         setPad_mac(strs[3]);
         setComputer_mac(strs[4]);
+
+
     }
 
 
