@@ -59,7 +59,9 @@ public class RobotBean {
         setPad_mac(strs[3]);
         setComputer_mac(strs[4]);
 
-
+        int size=strs.length;
+        ConectionControl.setYsSerialNum(strs[size-2]);
+        ConectionControl.setYsVerificationCode(strs[size-1]);
     }
 
 

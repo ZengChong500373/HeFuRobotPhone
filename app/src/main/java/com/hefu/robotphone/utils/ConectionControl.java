@@ -30,6 +30,26 @@ public class ConectionControl {
         spUtils.put("AUTOLOGIN", isAutoLogin);
     }
 
+    public static void setYsSerialNum(String str){
+        spUtils.put("YsSerialNum", str);
+    }
+    public static String getYsSerialNum(){
+        return (String) spUtils.get("YsSerialNum", "");
+    }
+    public static void setYsVerificationCode(String str){
+        spUtils.put("YsVerificationCode", str);
+    }
+    public static Boolean isScannBindRobot(){
+        return (Boolean) spUtils.get("isScannBindRobot", false);
+    }
+
+    public static void setScannBindRobot(Boolean isScann){
+        spUtils.put("isScannBindRobot", isScann);
+    }
+
+    public static String getYsVerificationCode(){
+        return (String) spUtils.get("YsVerificationCode", "");
+    }
     public static boolean getAutoLogin() {
         return (boolean) spUtils.get("AUTOLOGIN", true);
     }

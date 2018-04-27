@@ -66,6 +66,7 @@ public class RobotControlFragment extends LazyFragment<FragmentRobotControlBindi
         holder = jyhBinding.surface.getHolder();
         holder.addCallback(this);
         CheckToken();
+
         jyhBinding.imgPlay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -75,6 +76,10 @@ public class RobotControlFragment extends LazyFragment<FragmentRobotControlBindi
     }
 
     public void CheckToken() {
+        if (!ConectionControl.isScannBindRobot()) {
+            ToastUtils.getInstance().show("请绑定设备");
+            return;
+        }
         EZAccessToken token = RobotApplication.getOpenSDK().getEZAccessToken();
         if (token == null || token.getExpire() > System.currentTimeMillis()) {
             getToken();
@@ -117,13 +122,12 @@ public class RobotControlFragment extends LazyFragment<FragmentRobotControlBindi
             return;
         }
         if (mEZPlayer == null) {
-            mEZPlayer = RobotApplication.getOpenSDK().createPlayer("788411760", 1);
+            mEZPlayer = RobotApplication.getOpenSDK().createPlayer(ConectionControl.getYsSerialNum(), 1);
         }
 
         if (mEZPlayer == null)
             return;
-        mEZPlayer.setPlayVerifyCode("CCOYDD");
-
+        mEZPlayer.setPlayVerifyCode(ConectionControl.getYsVerificationCode());
         mEZPlayer.setHandler(mHandler);
         mEZPlayer.setSurfaceHold(holder);
         mEZPlayer.startRealPlay();

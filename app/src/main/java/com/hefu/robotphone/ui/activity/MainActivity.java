@@ -174,6 +174,7 @@ public class MainActivity extends BaseActivity
                         if (ip_mac.getMac().equals(robotBean.getPad_mac())) {
                             ConectionControl.setPadIp(ip_mac.getIp());
                             link();
+                            ConectionControl.setScannBindRobot(true);
                         }
                         if (ip_mac.getMac().equals(robotBean.getComputer_mac())) {
                             ConectionControl.setComputerIp(ip_mac.getIp());
