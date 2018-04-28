@@ -4,6 +4,7 @@ package com.hefu.robotphone.ui.fragment;
 import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.View;
 import android.widget.Toast;
@@ -28,6 +29,7 @@ import com.videogo.realplay.RealPlayStatus;
 import com.videogo.util.LogUtil;
 import com.videogo.util.Utils;
 
+import hefu.robotphone.sdk.utlis.MyLog;
 import hefu.robotphone.sdk.utlis.ToastUtils;
 import hefu.robotphone.uilibrary.base.LazyFragment;
 import hefu.robotphone.uilibrary.customview.DirectionControlView;
@@ -48,7 +50,7 @@ public class RobotControlFragment extends LazyFragment<FragmentRobotControlBindi
     private EZDeviceInfo mDeviceInfo = null;
     private Handler mHandler = null;
     private Boolean isTokenOk = false;
-
+private String TAG="RobotControlFragment";
     @Override
     public int setFragmentView() {
         return R.layout.fragment_robot_control;
@@ -228,7 +230,8 @@ public class RobotControlFragment extends LazyFragment<FragmentRobotControlBindi
                 txt = "视频播放失败";
                 break;
         }
-
+        Log.e(TAG,"errorCode="+errorCode +"   tex="+txt);
+        MyLog.write2File("errorCode="+errorCode +"tex="+txt);
         if (!TextUtils.isEmpty(txt)) {
             ToastUtils.getInstance().show(txt);
         }
