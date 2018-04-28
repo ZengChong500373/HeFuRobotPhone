@@ -127,9 +127,9 @@ public class DirectionControlView extends View {
                 break;
             case MotionEvent.ACTION_UP:// 抬起
                 event2Point(centerX, centerY);
-                 if (listener!=null){
-                     listener.direction(Direction.DIRECTION_CANCEL);
-                 }
+                if (listener != null) {
+                    listener.direction(Direction.DIRECTION_CANCEL, 0);
+                }
             case MotionEvent.ACTION_CANCEL:// 移出区域
                 break;
         }
@@ -145,37 +145,42 @@ public class DirectionControlView extends View {
         float lenXY = (float) Math.sqrt((double) (lenX * lenX + lenY * lenY));
         // 计算弧度
         double radian = Math.acos(lenX / lenXY) * (endy < centerY ? -1 : 1);
+        float percent = 0;
         if (lenXY <= bigRadius) {
             movecenterX = lenX;
             movecenterY = lenY;
+            percent = lenXY / bigRadius;
             invalidate();
         } else {
             movecenterX = (int) (centerX + (bigRadius) * Math.cos(radian)) - centerX;
             movecenterY = (int) (centerY + (bigRadius) * Math.sin(radian)) - centerY;
+            percent = 1;
             invalidate();
         }
 
         double angle = radian2Angle(radian);
-        calculateDirection(angle);
+        calculateDirection(angle, percent);
     }
 
     /**
      * 通过角度计算方向
      */
-    public void calculateDirection(double angle) {
+    public void calculateDirection(double angle, float percent) {
+
         if (listener == null) return;
         if (ANGLE_0 <= angle && ANGLE_ROTATE45_4D_OF_0P > angle || ANGLE_ROTATE45_4D_OF_3P <= angle && ANGLE_360 > angle) {
             // 右
-            listener.direction(Direction.DIRECTION_RIGHT);
+            listener.direction(Direction.DIRECTION_RIGHT, percent);
         } else if (ANGLE_ROTATE45_4D_OF_0P <= angle && ANGLE_ROTATE45_4D_OF_1P > angle) {
             // 下
-            listener.direction(Direction.DIRECTION_DOWN);
+            listener.direction(Direction.DIRECTION_DOWN, percent);
         } else if (ANGLE_ROTATE45_4D_OF_1P <= angle && ANGLE_ROTATE45_4D_OF_2P > angle) {
             // 左
-            listener.direction(Direction.DIRECTION_LEFT);
+            listener.direction(Direction.DIRECTION_LEFT, percent);
         } else if (ANGLE_ROTATE45_4D_OF_2P <= angle && ANGLE_ROTATE45_4D_OF_3P > angle) {
             // 上
-            listener.direction(Direction.DIRECTION_UP);
+
+            listener.direction(Direction.DIRECTION_UP, percent);
         }
     }
 
@@ -191,7 +196,7 @@ public class DirectionControlView extends View {
     }
 
     public interface OnDirectionListener {
-        void direction(Direction enumDirection);
+        void direction(Direction enumDirection, float percent);
     }
 
     public OnDirectionListener listener;
@@ -210,13 +215,14 @@ public class DirectionControlView extends View {
         DIRECTION_DOWN, // 下
         DIRECTION_CANCEL //取消
     }
+
     @Override
     protected void onWindowVisibilityChanged(int visibility) {
         super.onWindowVisibilityChanged(visibility);
-        if (visibility==GONE){
-            if(listener!=null){
+        if (visibility == GONE) {
+            if (listener != null) {
                 event2Point(centerX, centerY);
-                listener.direction(Direction.DIRECTION_CANCEL);
+                listener.direction(Direction.DIRECTION_CANCEL, 0);
             }
 
         }

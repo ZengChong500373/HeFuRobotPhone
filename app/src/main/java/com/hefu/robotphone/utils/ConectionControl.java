@@ -84,11 +84,11 @@ public class ConectionControl {
         return sendMsgToken;
     }
 
-    public static String getDirectionString(DirectionControlView.Direction direction) {
+    public static String getDirectionString(DirectionControlView.Direction direction,float percent) {
         if (direction == DirectionControlView.Direction.DIRECTION_UP) {
-            return getRoboId() + " " + SystemInfoUtil.getMac() + " 4" + ByteUtil.byteToHexStr(ByteUtil.intToByte(CodeInstructionSet.BUF_ACTION_FORWARD), "") + " " + 60;
+            return getRoboId() + " " + SystemInfoUtil.getMac() + " 4" + ByteUtil.byteToHexStr(ByteUtil.intToByte(CodeInstructionSet.BUF_ACTION_FORWARD), "") + " " + (int) (120*percent);
         } else if (direction == DirectionControlView.Direction.DIRECTION_DOWN) {
-            return getRoboId() + " " + SystemInfoUtil.getMac() + " 4" + ByteUtil.byteToHexStr(ByteUtil.intToByte(CodeInstructionSet.BUF_ACTION_BACK), "") + " " + 60;
+            return getRoboId() + " " + SystemInfoUtil.getMac() + " 4" + ByteUtil.byteToHexStr(ByteUtil.intToByte(CodeInstructionSet.BUF_ACTION_BACK), "") + " " + (int) (120*percent);
         } else if (direction == DirectionControlView.Direction.DIRECTION_LEFT) {
             return getRoboId() + " " + SystemInfoUtil.getMac() + " 4" + ByteUtil.byteToHexStr(ByteUtil.intToByte(CodeInstructionSet.BUF_ACTION_LEFT), "") + " " + 60;
         } else if (direction == DirectionControlView.Direction.DIRECTION_RIGHT) {

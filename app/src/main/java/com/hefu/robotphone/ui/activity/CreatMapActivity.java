@@ -34,7 +34,7 @@ public class CreatMapActivity extends AppCompatActivity {
     }
 
     private void initData() {
-        if (DealMapUtils.getCurrentBit()!=null){
+        if (DealMapUtils.getCurrentBit() != null) {
             binding.rlBackground.setBackgroundColor(Color.parseColor("#7F7F7F"));
         }
         binding.imgMap.setImageBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.creat_map_backgroud));
@@ -44,8 +44,8 @@ public class CreatMapActivity extends AppCompatActivity {
         robotMapSocket.setCallBack(new RobotInfoCallBack() {
             @Override
             public void RobotInfoSuccess(final String str) {
-                isCreatMap=true;
-                if (isCreatMap){
+                isCreatMap = true;
+                if (isCreatMap) {
                     binding.rlBackground.setBackgroundColor(Color.parseColor("#7F7F7F"));
                 }
                 DealMapUtils.dellRobotMessage(str);
@@ -57,9 +57,10 @@ public class CreatMapActivity extends AppCompatActivity {
             }
         });
         binding.directionContralView.setOnDirectionListener(new DirectionControlView.OnDirectionListener() {
+
             @Override
-            public void direction(DirectionControlView.Direction direction) {
-                MainActivity.socket.goWhere(ConectionControl.getDirectionString(direction));
+            public void direction(DirectionControlView.Direction direction, float percent) {
+                MainActivity.socket.goWhere(ConectionControl.getDirectionString(direction,percent));
             }
         });
     }
@@ -73,7 +74,6 @@ public class CreatMapActivity extends AppCompatActivity {
             }
         });
     }
-
 
 
     public void creatMap(View view) {
@@ -98,6 +98,12 @@ public class CreatMapActivity extends AppCompatActivity {
         if (MainActivity.socket.getReady()) {
             MainActivity.socket.robotCmd(ConectionControl.saveMap());
             showSnackbar("保存成功");
+            binding.toolbar.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    finish();
+                }
+            }, 2000);
         } else {
             showSnackbar("未连接机器人");
         }

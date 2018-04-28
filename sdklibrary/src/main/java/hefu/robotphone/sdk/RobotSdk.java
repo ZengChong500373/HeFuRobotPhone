@@ -20,7 +20,7 @@ public class RobotSdk {
         mContext = initContext;
         CrashHandler.getInstance().init(mContext);
 
-        BlockCanary.install(mContext, new AppBlockCanaryContext()).start();
+//        BlockCanary.install(mContext, new AppBlockCanaryContext()).start();
 
     }
 

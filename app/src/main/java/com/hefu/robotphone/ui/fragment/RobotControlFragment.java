@@ -25,9 +25,6 @@ import com.videogo.openapi.bean.EZDeviceInfo;
 import hefu.robotphone.sdk.bean.TokenBean;
 
 import com.hefu.robotphone.http.Network;
-import com.videogo.realplay.RealPlayStatus;
-import com.videogo.util.LogUtil;
-import com.videogo.util.Utils;
 
 import hefu.robotphone.sdk.utlis.MyLog;
 import hefu.robotphone.sdk.utlis.ToastUtils;
@@ -50,7 +47,8 @@ public class RobotControlFragment extends LazyFragment<FragmentRobotControlBindi
     private EZDeviceInfo mDeviceInfo = null;
     private Handler mHandler = null;
     private Boolean isTokenOk = false;
-private String TAG="RobotControlFragment";
+    private String TAG = "RobotControlFragment";
+
     @Override
     public int setFragmentView() {
         return R.layout.fragment_robot_control;
@@ -60,8 +58,9 @@ private String TAG="RobotControlFragment";
     public void onFirstUserVisible() {
         jyhBinding.directionContralView.setOnDirectionListener(new DirectionControlView.OnDirectionListener() {
             @Override
-            public void direction(DirectionControlView.Direction direction) {
-                MainActivity.socket.goWhere(ConectionControl.getDirectionString(direction));
+            public void direction(DirectionControlView.Direction direction,float percent) {
+                String str =ConectionControl.getDirectionString(direction,percent);
+                MainActivity.socket.goWhere(str);
             }
         });
         mHandler = new Handler(this);
@@ -108,7 +107,6 @@ private String TAG="RobotControlFragment";
             public void onNext(TokenBean tokenBean) {
                 String accessToken = tokenBean.getData().getAccessToken();
                 RobotApplication.getOpenSDK().setAccessToken(accessToken);
-                ToastUtils.getInstance().show("获取token 成功");
                 isTokenOk = true;
                 startRealPlay();
             }
@@ -192,7 +190,7 @@ private String TAG="RobotControlFragment";
         // 判断返回的错误码
         switch (errorCode) {
             case ErrorCode.ERROR_TRANSF_ACCESSTOKEN_ERROR:
-                getToken();
+               getToken();
                 return;
             case ErrorCode.ERROR_CAS_MSG_PU_NO_RESOURCE:
                 txt = "设备连接数过大，停止其他连接后再试试吧";
@@ -230,8 +228,8 @@ private String TAG="RobotControlFragment";
                 txt = "视频播放失败";
                 break;
         }
-        Log.e(TAG,"errorCode="+errorCode +"   tex="+txt);
-        MyLog.write2File("errorCode="+errorCode +"tex="+txt);
+        Log.e(TAG, "errorCode=" + errorCode + "   tex=" + txt);
+        MyLog.write2File("errorCode=" + errorCode + "tex=" + txt);
         if (!TextUtils.isEmpty(txt)) {
             ToastUtils.getInstance().show(txt);
         }
