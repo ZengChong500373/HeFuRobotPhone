@@ -118,7 +118,7 @@ public class CreatMapActivity extends AppCompatActivity {
         }
     }
 
-    public void showSnackbar(String str) {
+    public void showSnackbar(final String str) {
         Snackbar.make(binding.toolbar, str, Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show();
     }

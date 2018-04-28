@@ -9,12 +9,15 @@ import android.net.Uri;
 import android.os.Build;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AlertDialog;
-
+import android.text.TextUtils;
+import android.widget.TextView;
 
 
 import java.io.File;
 import hefu.robotphone.sdk.RobotSdk;
 import hefu.robotphone.sdk.bean.VersionBean;
+
+import com.hefu.robotphone.R;
 import com.hefu.robotphone.http.Network;
 
 import hefu.robotphone.sdk.utlis.Constant;
@@ -58,7 +61,7 @@ public class VersionUtils {
                 MyLog.write2File("versionBean "+versionBean.toString());
                 if (versionBean != null && getVersion() < versionBean.build) {
                     newVersionUrl=versionBean.installUrl;
-                    showDialog();
+                    showDialog(versionBean.changelog);
                 }
             }
         });
@@ -76,9 +79,13 @@ public class VersionUtils {
         return versionCode;
     }
 
-    public static void showDialog() {
+    public static void showDialog(String str) {
         android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(mContext);
-        builder.setMessage("当前有最新版本，请问是否更新？");
+        builder.setTitle("检测到新版本,是否升级");
+
+        if (!TextUtils.isEmpty(str)) {
+            builder.setMessage(str);
+        }
         builder.setNegativeButton("取消",null);
         builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
             @Override
@@ -88,6 +95,8 @@ public class VersionUtils {
         });
         AlertDialog dialog= builder.create();
         dialog.show();
+        TextView textView= dialog.getWindow().findViewById(R.id.alertTitle);
+        textView.setTextColor(Color.parseColor("#3F51B5"));
         dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.parseColor("#3F51B5"));
         dialog.getButton(DialogInterface.BUTTON_NEGATIVE).setTextColor(Color.parseColor("#3F51B5"));
     }

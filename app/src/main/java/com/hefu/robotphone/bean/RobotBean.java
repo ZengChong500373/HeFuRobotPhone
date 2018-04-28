@@ -51,17 +51,21 @@ public class RobotBean {
         this.computer_mac = computer_mac;
     }
     public void setData(String str){
-        String[]  strs=str.split(enter);
-        setRobot_id(strs[0]);
-        ConectionControl.setRobotId(strs[0]);
-        setFcamid(strs[1]);
-        setFpass_word(strs[2]);
-        setPad_mac(strs[3]);
-        setComputer_mac(strs[4]);
+        try{
+            String[]  strs=str.split(enter);
+            setRobot_id(strs[0]);
+            ConectionControl.setRobotId(strs[0]);
+            setFcamid(strs[1]);
+            setFpass_word(strs[2]);
+            setPad_mac(strs[3]);
+            setComputer_mac(strs[4]);
+            int size=strs.length;
+            ConectionControl.setYsSerialNum(strs[size-2]);
+            ConectionControl.setYsVerificationCode(strs[size-1]);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
 
-        int size=strs.length;
-        ConectionControl.setYsSerialNum(strs[size-2]);
-        ConectionControl.setYsVerificationCode(strs[size-1]);
     }
 
 
