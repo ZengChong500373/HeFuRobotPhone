@@ -6,7 +6,7 @@ android {
         applicationId "com.hefu.robotphone"
         minSdkVersion 16
         targetSdkVersion 22
-        versionCode 3
+        versionCode 6
         versionName "1.3"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }

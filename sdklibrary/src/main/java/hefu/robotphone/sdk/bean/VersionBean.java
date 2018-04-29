@@ -5,6 +5,7 @@ public class VersionBean {
     public String version;
     public String versionShort;
     public int build;
+    public String changelog;
     public String installUrl;
     public String install_url;
     public String direct_install_url;
