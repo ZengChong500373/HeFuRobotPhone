@@ -79,7 +79,8 @@ public class CreatMapActivity extends AppCompatActivity {
     public void creatMap(View view) {
         if (MainActivity.socket.getReady()) {
             MainActivity.socket.robotCmd(ConectionControl.creatMap());
-            showSnackbar("创建新地图");
+            MainActivity.socket.robotSpeak("正在创建地图");
+            showSnackbar("正在创建地图");
         } else {
             showSnackbar("请扫描二维码绑定控制机器人");
         }
@@ -88,7 +89,8 @@ public class CreatMapActivity extends AppCompatActivity {
     public void cancleCreatMap(View view) {
         if (MainActivity.socket.getReady()) {
             MainActivity.socket.robotCmd(ConectionControl.cancleCreatMap());
-            showSnackbar("取消创建");
+            MainActivity.socket.robotSpeak("取消建图");
+            showSnackbar("取消建图");
         } else {
             showSnackbar("未连接机器人");
         }
@@ -97,6 +99,7 @@ public class CreatMapActivity extends AppCompatActivity {
     public void saveMap(View view) {
         if (MainActivity.socket.getReady()) {
             MainActivity.socket.robotCmd(ConectionControl.saveMap());
+            MainActivity.socket.robotSpeak("地图保存成功");
             showSnackbar("保存成功");
             binding.toolbar.postDelayed(new Runnable() {
                 @Override
@@ -109,14 +112,14 @@ public class CreatMapActivity extends AppCompatActivity {
         }
     }
 
-    public void syncMap(View view) {
-        if (MainActivity.socket.getReady()) {
-            MainActivity.socket.robotCmd(ConectionControl.syncMap());
-            showSnackbar("同步地图");
-        } else {
-            showSnackbar("未连接机器人");
-        }
-    }
+//    public void syncMap(View view) {
+//        if (MainActivity.socket.getReady()) {
+//            MainActivity.socket.robotCmd(ConectionControl.syncMap());
+//            showSnackbar("同步地图");
+//        } else {
+//            showSnackbar("未连接机器人");
+//        }
+//    }
 
     public void showSnackbar(final String str) {
         Snackbar.make(binding.toolbar, str, Snackbar.LENGTH_LONG)

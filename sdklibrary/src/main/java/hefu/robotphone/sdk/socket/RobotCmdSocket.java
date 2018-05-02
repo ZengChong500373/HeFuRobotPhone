@@ -118,7 +118,16 @@ public class RobotCmdSocket {
         }
 
     }
-
+    String robotSpeak;
+    public void robotSpeak(final String speak) {
+         robotSpeak = "speakTTS" + " " + SystemInfoUtil.getMac() + " 4" + " "+ " " + "888"+ " " + speak ;
+        ThreadManager.getInstance().addRun(new Runnable() {
+            @Override
+            public void run() {
+                sendMsg(robotSpeak);
+            }
+        });
+    }
     public void robotCmd(final String speak) {
         ThreadManager.getInstance().addRun(new Runnable() {
             @Override

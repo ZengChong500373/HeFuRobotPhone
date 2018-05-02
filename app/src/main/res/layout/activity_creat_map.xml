@@ -80,17 +80,17 @@
                     android:textStyle="bold" />
 
 
-                <Button
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_below="@+id/start_creat_map"
-                    android:layout_toRightOf="@+id/map_save"
-                    android:layout_weight="1"
-                    android:background="#5f000000"
-                    android:onClick="syncMap"
-                    android:text="同步"
-                    android:textColor="#FFFFFF"
-                    android:textStyle="bold" />
+                <!--<Button-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--android:layout_below="@+id/start_creat_map"-->
+                    <!--android:layout_toRightOf="@+id/map_save"-->
+                    <!--android:layout_weight="1"-->
+                    <!--android:background="#5f000000"-->
+                    <!--android:onClick="syncMap"-->
+                    <!--android:text="同步"-->
+                    <!--android:textColor="#FFFFFF"-->
+                    <!--android:textStyle="bold" />-->
 
 
             </LinearLayout>
